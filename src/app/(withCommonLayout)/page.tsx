@@ -1,7 +1,12 @@
+import BrandSlider from '@/components/ui/BrandSlider';
+import Carousel from '@/components/ui/Carousel';
+
 export default function Home() {
   return (
     <div>
-      <h1>Hello Mobile shop</h1>
+      {/* <BannerSlider /> */}
+      <Carousel />
+      <BrandSlider />
     </div>
   );
 }
