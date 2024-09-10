@@ -11,25 +11,32 @@ import {
   NavbarItem,
   Link,
   Button,
+  Badge,
 } from '@nextui-org/react';
 import { ThemeSwitcher } from '../ThemeSwitcher';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '@/redux/hooks';
+import { logout, selectUser } from '@/redux/features/auth/authSlice';
+import { ShoppingCart } from 'lucide-react';
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out',
-  ];
+  const dispatch = useDispatch();
+
+  const user = useAppSelector(selectUser);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const menuItems = ['Profile', 'Dashboard', 'Log Out'];
+
+  const routeMap: Record<string, string> = {
+    user: '/dashboard',
+    admin: '/dashboard/admin',
+  };
 
   return (
     <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
@@ -41,45 +48,57 @@ export default function NavBar() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">Mobile Shop</p>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify="end">
         <NavbarBrand>
-          {/* <AcmeLogo /> */}
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">
+            <Link href="/" aria-current="page">
+              Mobile Shop
+            </Link>
+          </p>
         </NavbarBrand>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
+
+        <NavbarItem isActive>
+          <Link href="/" aria-current="page">
+            Home
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
+          <Link href="/product" aria-current="page">
+            Products
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
+          {user?.userEmail && (
+            <Link href={routeMap[user.role] || '/'}>Dashboard</Link>
+          )}
         </NavbarItem>
-      </NavbarContent>
 
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="warning" href="/register" variant="flat">
-            Sign Up
-          </Button>
+          {/* content={selectedItems} */}
+          <Badge color="warning">
+            <Link href="/cart">
+              <ShoppingCart size={24} />
+            </Link>
+          </Badge>
         </NavbarItem>
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
+        {user?.userEmail ? (
+          <NavbarItem>
+            <Button onClick={handleLogout} color="secondary" variant="flat">
+              Logout
+            </Button>
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="hidden lg:flex">
+            <Link href="/login">Login</Link>
+          </NavbarItem>
+        )}
       </NavbarContent>
 
       <NavbarMenu>

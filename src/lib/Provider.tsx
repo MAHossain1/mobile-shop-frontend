@@ -1,11 +1,11 @@
 'use client';
 
-import { store } from '@/redux/store';
+import { persistor, store } from '@/redux/store';
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Provider } from 'react-redux';
 import { Toaster } from 'sonner';
-import { AuthProvider } from './AuthProvider';
+import { PersistGate } from 'redux-persist/integration/react';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +14,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <NextThemesProvider attribute="class" defaultTheme="dark">
         <Toaster />
         <Provider store={store}>
-          <AuthProvider>{children}</AuthProvider>
+          {/* <AuthProvider></AuthProvider> */}
+          {/* {children} */}
+
+          <PersistGate persistor={persistor}>{children}</PersistGate>
         </Provider>
       </NextThemesProvider>
     </NextUIProvider>
