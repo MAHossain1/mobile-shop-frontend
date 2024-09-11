@@ -67,8 +67,8 @@ export default function NavBar() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="/product" aria-current="page">
-            Products
+          <Link href="/mobiles" aria-current="page">
+            All Mobiles
           </Link>
         </NavbarItem>
         <NavbarItem>

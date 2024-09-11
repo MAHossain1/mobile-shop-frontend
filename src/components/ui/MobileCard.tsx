@@ -8,6 +8,7 @@ import {
   CardFooter,
 } from '@nextui-org/react';
 import { TMobile } from '../types/mobile';
+import Link from 'next/link';
 
 const MobileCard = (mobile: TMobile) => {
   return (
@@ -39,7 +40,7 @@ const MobileCard = (mobile: TMobile) => {
           radius="lg"
           size="sm"
         >
-          View Details
+          <Link href={`/mobiles/${mobile._id}`}>View Details</Link>
         </Button>
         <Button
           className="text-tiny"
