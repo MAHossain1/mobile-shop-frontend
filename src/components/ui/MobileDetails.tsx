@@ -2,14 +2,15 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
+import { useGetReviewsByProductIdQuery } from '@/redux/features/review/reviewApi';
+import { Checkbox } from '@nextui-org/react';
+import Image from 'next/image';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { TMobile } from '../types/mobile';
-import Image from 'next/image';
-import { List, ListCheck } from 'lucide-react';
-import { Checkbox } from '@nextui-org/react';
 import ReviewForm from '../form/ReviewForm';
-import { useGetReviewsByProductIdQuery } from '@/redux/features/review/reviewApi';
+import { TMobile } from '../types/mobile';
+import { addToCart } from '@/redux/features/cart/cartSlice';
+import { toast } from 'sonner';
 
 interface ProductDetailProps {
   mobile: TMobile;
@@ -17,15 +18,13 @@ interface ProductDetailProps {
 
 const MobileDetails: React.FC<ProductDetailProps> = ({ mobile }) => {
   const dispatch = useDispatch();
-  // console.log(mobile, 'from details component');
 
   const { data: reviews } = useGetReviewsByProductIdQuery(mobile._id);
-  console.log(reviews);
 
-  //   // console.log(reviews?.data);
-  //   const onAddToCart = () => {
-  //     dispatch(addToCart(product));
-  //   };
+  const handleAddToCart = () => {
+    dispatch(addToCart(mobile));
+    toast.success('Your just added this product to cart.');
+  };
 
   return (
     <div>
@@ -68,7 +67,7 @@ const MobileDetails: React.FC<ProductDetailProps> = ({ mobile }) => {
               </p>
             </div>
             <button
-              //   onClick={onAddToCart}
+              onClick={handleAddToCart}
               className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Add to Cart

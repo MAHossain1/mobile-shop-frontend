@@ -9,8 +9,18 @@ import {
 } from '@nextui-org/react';
 import { TMobile } from '../types/mobile';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/redux/features/cart/cartSlice';
+import { toast } from 'sonner';
 
 const MobileCard = (mobile: TMobile) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(mobile));
+    toast.success('Your just added this product to cart.');
+  };
+
   return (
     <Card className="py-4">
       <CardBody className="overflow-visible py-2">
@@ -28,12 +38,6 @@ const MobileCard = (mobile: TMobile) => {
       </CardBody>
 
       <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-center">
-        <div>
-          {/* <p className="text-tiny text-red/60 uppercase font-bold">New</p>
-          <h4 className="text-primary font-medium text-2xl">{mobile.name}</h4> */}
-          {/* <p className="text-black text-2xl">Price: ${mobile.price}</p>
-          <p className="text-black text-tiny">Get notified.</p> */}
-        </div>
         <Button
           className="text-tiny mr-10"
           color="primary"
@@ -48,41 +52,12 @@ const MobileCard = (mobile: TMobile) => {
           color="primary"
           radius="lg"
           size="sm"
+          onClick={handleAddToCart}
         >
           Add to Cart
         </Button>
       </CardFooter>
     </Card>
-
-    // <Card isFooterBlurred className="py-4">
-    //   <CardHeader className="absolute z-10 top-1 flex-col items-start"></CardHeader>
-    //   <Image
-    //     removeWrapper
-    //     alt="Card example background"
-    //     className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-    //     src={mobile.imgUrl}
-    //   />
-    //   <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-    //     <div>
-    //       <p className="text-tiny text-red/60 uppercase font-bold">New</p>
-    //       <h4 className="text-primary font-medium text-2xl">{mobile.name}</h4>
-    //       <p className="text-black text-2xl">Price: ${mobile.price}</p>
-    //       <p className="text-black text-tiny">Get notified.</p>
-    //     </div>
-    //     <Button className="text-tiny" color="primary" radius="lg" size="sm">
-    //       View Details
-    //     </Button>
-    //     <Button
-    //       className="text-tiny"
-    //       variant="bordered"
-    //       color="primary"
-    //       radius="lg"
-    //       size="sm"
-    //     >
-    //       Add to Cart
-    //     </Button>
-    //   </CardFooter>
-    // </Card>
   );
 };
 

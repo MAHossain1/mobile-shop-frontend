@@ -3,13 +3,28 @@
 import { TMobile } from '@/components/types/mobile';
 import MobileCard from '@/components/ui/MobileCard';
 import { useGetAllMobileQuery } from '@/redux/features/mobiles/mobilesApi';
-import { Button } from '@nextui-org/react';
-import React from 'react';
-
+import { Spinner } from '@nextui-org/react';
 const Featured = () => {
   const { data = { data: [] }, isLoading, isError } = useGetAllMobileQuery('');
 
-  //   console.log(data.data.length);
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  // Handle error state
+  if (isError) {
+    return (
+      <div className="text-center text-red-600">
+        <p>Something went wrong! Please try again later.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-screen-xl px-2">

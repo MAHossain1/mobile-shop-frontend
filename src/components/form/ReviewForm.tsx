@@ -14,9 +14,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ mobileId }) => {
   const [reviewText, setReviewText] = useState('');
   const [ratings, setRatings] = useState<number>(5);
   const user = useSelector(selectUser);
-  console.log(mobileId, 'from review form');
 
-  // useCreateReviewMutation hook to submit the review
   const [createReview, { isLoading }] = useCreateReviewMutation();
 
   const handleRating = (value: any) => {
