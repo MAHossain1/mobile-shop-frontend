@@ -5,8 +5,9 @@ const initialState = {
   mobiles: [] as any,
   selectedItems: 0,
   totalPrice: 0,
-  tax: 0.05,
+  tax: 0.0,
   grandTotal: 0,
+  taxRate: 0.05,
 };
 
 const cartSlice = createSlice({
@@ -52,8 +53,9 @@ const cartSlice = createSlice({
       state.selectedItems = selectSelectedItems(state);
       state.totalPrice = selectTotalPrice(state);
 
-      console.log(state.totalPrice, 'from cart');
+      // console.log(state.totalPrice, 'from cart');
       state.tax = selectTax(state);
+      // console.log(state.tax, 'order summary');
       state.grandTotal = selectGrandTotal(state);
     },
 
