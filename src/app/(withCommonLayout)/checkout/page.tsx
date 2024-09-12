@@ -3,7 +3,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { Trash2 } from 'lucide-react';
 // import { useRouter } from "next/router";
@@ -15,10 +15,11 @@ import { clearCart } from '@/redux/features/cart/cartSlice';
 import { useCreateOrderMutation } from '@/redux/features/order/orderApi';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const CheckoutPage = () => {
   const dispatch = useAppDispatch();
-  // const router = useRouter();
+  const router = useRouter();
 
   const { mobiles, totalPrice } = useAppSelector(state => state.cart);
   const [createOrder, { isError, isLoading }] = useCreateOrderMutation();
@@ -27,11 +28,23 @@ const CheckoutPage = () => {
   const deliveryCharge = 15;
   const grandTotal = totalPrice + deliveryCharge;
 
+  // Redirect to login if user is not logged in
+  useEffect(() => {
+    if (!user) {
+      router.push(`/login?redirect=/checkout`);
+    }
+  }, [user, router]);
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
 
   const handleProceedCheckout = async () => {
+    if (!user) {
+      router.push(`/login?redirect=/checkout`);
+      return;
+    }
+
     const orderData = {
       products: mobiles.map((product: any) => ({
         productId: product._id,

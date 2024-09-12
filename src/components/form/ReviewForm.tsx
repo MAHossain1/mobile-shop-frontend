@@ -1,6 +1,6 @@
 import { selectUser } from '@/redux/features/auth/authSlice';
 import { useCreateReviewMutation } from '@/redux/features/review/reviewApi';
-import { Select, SelectItem, Textarea } from '@nextui-org/react';
+import { Textarea } from '@nextui-org/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -17,7 +17,11 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ mobileId }) => {
 
   const [createReview, { isLoading }] = useCreateReviewMutation();
 
-  const handleRating = (value: any) => {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  const handleRating = (value: number) => {
     setRatings(value);
   };
 

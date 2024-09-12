@@ -9,11 +9,6 @@ type TOrderItem = {
 };
 
 type TOrder = {
-  // user: {
-  //   userId: string;
-  //   userName: string;
-  //   userEmail: string;
-  // };
   products: TOrderItem[];
   totalAmount: number;
   paymentMethod: string;

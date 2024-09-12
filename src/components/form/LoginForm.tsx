@@ -6,7 +6,7 @@ import { setUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { Input } from '@nextui-org/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import SubmitButton from '../ui/SubmitButton';
@@ -25,11 +25,12 @@ const LoginForm = () => {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams(); // Get the query parameters
+  const redirect = searchParams?.get('redirect'); // Extract the 'redirect' parameter from the query
 
   const [login] = useLoginMutation();
 
   const onSubmit: SubmitHandler<TInput> = async data => {
-    // console.log(data);
     const userCredential = {
       email: data.email,
       password: data.password,
@@ -56,7 +57,9 @@ const LoginForm = () => {
         const user = verifyToken(result.data.data.accessToken);
 
         dispatch(setUser({ user, token: result.data.data.accessToken }));
-        router.push('/');
+
+        // If redirect parameter exists, go there, otherwise go to homepage
+        router.push(redirect ? String(redirect) : '/');
       }
     } catch (error) {
       toast.error('Something went wrong!');

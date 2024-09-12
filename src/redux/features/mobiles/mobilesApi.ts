@@ -8,14 +8,17 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ['mobile'],
     }),
-    // login: builder.mutation({
-    //   query: userCredentials => ({
-    //     url: 'auth/login',
-    //     method: 'POST',
-    //     body: userCredentials,
-    //   }),
-    // }),
+    createMobile: builder.mutation({
+      query: ({ mobileData, token }) => ({
+        url: 'mobile/add-product',
+        method: 'POST',
+        body: mobileData,
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetAllMobileQuery } = authApi;
+export const { useGetAllMobileQuery, useCreateMobileMutation } = authApi;
