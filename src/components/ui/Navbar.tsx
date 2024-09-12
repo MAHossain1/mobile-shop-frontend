@@ -21,6 +21,7 @@ import { ShoppingCart } from 'lucide-react';
 // import {AcmeLogo} from "./AcmeLogo.jsx";
 
 export default function NavBar() {
+  const { selectedItems } = useAppSelector(store => store.cart);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -78,8 +79,7 @@ export default function NavBar() {
         </NavbarItem>
 
         <NavbarItem>
-          {/* content={selectedItems} */}
-          <Badge color="warning">
+          <Badge content={selectedItems} color="danger">
             <Link href="/cart">
               <ShoppingCart size={24} />
             </Link>

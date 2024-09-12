@@ -9,15 +9,15 @@ type TOrderItem = {
 };
 
 type TOrder = {
-  user: {
-    userId: string;
-    userName: string;
-    userEmail: string;
-  };
+  // user: {
+  //   userId: string;
+  //   userName: string;
+  //   userEmail: string;
+  // };
   products: TOrderItem[];
   totalAmount: number;
   paymentMethod: string;
-  status: string;
+  order_status: string;
 };
 
 const initialState: TOrder[] = [];
