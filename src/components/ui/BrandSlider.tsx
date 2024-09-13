@@ -73,7 +73,7 @@ function BrandSlider() {
           </div>
           <div>
             <Image
-              src="https://i.ibb.co.com/LtNXTTV/pngegg-6.png"
+              src="https://i.ibb.co.com/dGH36p0/pngegg-8.png"
               alt="phone-logo"
               height="100"
               width="100"

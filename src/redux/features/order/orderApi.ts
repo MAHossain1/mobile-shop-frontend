@@ -12,6 +12,14 @@ const orderApi = baseApi.injectEndpoints({
         },
       }),
     }),
+    getAllOrder: builder.query({
+      query: token => ({
+        url: 'order/all-orders',
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
     getUserOrders: builder.query({
       query: token => ({
         url: 'order/my-orders',
@@ -20,7 +28,28 @@ const orderApi = baseApi.injectEndpoints({
         },
       }),
     }),
+    updateOrder: builder.mutation({
+      query: ({ status, token, orderId }) => {
+        // console.log(orderId, status, token, 'from redux api');
+
+        return {
+          method: 'PATCH',
+          url: `/order/${orderId}`, // API endpoint with dynamic orderId
+          body: { status }, // Send status as request body
+          headers: {
+            Authorization: `${token}`, // Ensure token is valid
+            'Content-Type': 'application/json',
+          },
+        };
+      },
+      invalidatesTags: ['order'],
+    }),
   }),
 });
 
-export const { useCreateOrderMutation, useGetUserOrdersQuery } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetAllOrderQuery,
+  useGetUserOrdersQuery,
+  useUpdateOrderMutation,
+} = orderApi;

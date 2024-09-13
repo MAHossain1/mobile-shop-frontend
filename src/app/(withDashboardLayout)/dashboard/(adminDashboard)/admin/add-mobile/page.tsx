@@ -80,11 +80,11 @@ const AddMobile = () => {
     }
   };
 
-  //   console.log(mobileData, 'add mobile');
+  console.log(mobileData, 'add mobile');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(mobileData, 'from submit');
+    // console.log(mobileData, 'from submit');
     setLoading(true);
     try {
       if (!mobileData.imgUrl) {
@@ -105,7 +105,7 @@ const AddMobile = () => {
       }
 
       const newProduct = await createMobile({ mobileData, token }).unwrap();
-      console.log(newProduct, 'after submitting');
+      //   console.log(newProduct, 'after submitting');
       toast.success('Mobile added successfully');
       router.push('/mobiles'); // Adjust the route as needed
 
@@ -119,7 +119,7 @@ const AddMobile = () => {
         features: [] as string[],
       });
     } catch (error: any) {
-      console.error('Error adding Mobile:', error); // Log the actual error
+      //   console.error('Error adding Mobile:', error); // Log the actual error
       toast.error('Failed to add Mobile');
     } finally {
       setLoading(false);
@@ -169,9 +169,9 @@ const AddMobile = () => {
           placeholder="Enter product price"
           type="number"
           fullWidth
-          value={mobileData.price.toString()} // Convert number to string
-          onChange={
-            e => setMobileData({ ...mobileData, price: Number(e.target.value) }) // Convert string back to number
+          value={mobileData.price.toString()}
+          onChange={e =>
+            setMobileData({ ...mobileData, price: Number(e.target.value) })
           }
           required
         />
