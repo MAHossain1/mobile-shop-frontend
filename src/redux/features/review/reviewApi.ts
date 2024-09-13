@@ -17,6 +17,12 @@ const reviewApi = baseApi.injectEndpoints({
         body: reviewData,
       }),
       invalidatesTags: ['review'],
+      transformErrorResponse: response => {
+        return {
+          data: response.data,
+          status: response.status,
+        };
+      },
     }),
   }),
 });
