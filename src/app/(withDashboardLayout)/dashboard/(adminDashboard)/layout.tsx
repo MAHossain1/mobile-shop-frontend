@@ -1,5 +1,5 @@
-import NavBar from '@/components/ui/Navbar';
 import type { Metadata } from 'next';
+import Sidebar from '../dashboardComponent/Sidebar';
 
 export const metadata: Metadata = {
   title: 'Admin Dashboard',
@@ -12,9 +12,9 @@ export default async function userDashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <NavBar />
-      <main className="min-h-screen max-w-screen-xl	mx-auto">{children}</main>
+    <div className="flex">
+      <Sidebar />
+      <main className="flex-1 bg-gray-100">{children}</main>
     </div>
   );
 }
