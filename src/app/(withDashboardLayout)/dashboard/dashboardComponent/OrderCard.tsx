@@ -55,19 +55,19 @@ const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
       <div className="mt-4">
         <h3 className="text-lg font-semibold">Products</h3>
         <ul>
-          {products.map(product => (
-            <li key={product.productId.name} className="mb-3">
+          {products?.map(product => (
+            <li key={product?.productId?.name} className="mb-3">
               <p>
-                <strong>Name:</strong> {product.productId.name}
+                <strong>Name:</strong> {product?.productId?.name}
               </p>
               <p>
-                <strong>Description:</strong> {product.productId.description}
+                <strong>Description:</strong> {product?.productId?.description}
               </p>
               <p>
-                <strong>Price:</strong> ${product.productId.price}
+                <strong>Price:</strong> ${product?.productId?.price}
               </p>
               <p>
-                <strong>Quantity:</strong> {product.quantity}
+                <strong>Quantity:</strong> {product?.quantity}
               </p>
             </li>
           ))}

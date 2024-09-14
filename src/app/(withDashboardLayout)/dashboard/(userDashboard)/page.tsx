@@ -11,14 +11,14 @@ const MyDashboardPage = () => {
   const token = useAppSelector(selectToken);
   const { data: myOrders } = useGetUserOrdersQuery(token);
 
-  console.log(myOrders);
+  // console.log(myOrders);
 
   return (
     <div>
       <h1 className="text-2xl font-semibold mt-8 text-center">My Orders</h1>
 
       {myOrders?.data?.length > 0 ? (
-        myOrders.data.map((order: any) => (
+        myOrders?.data?.map((order: any) => (
           <OrderCard key={order._id} order={order} />
         ))
       ) : (

@@ -54,7 +54,7 @@ const CheckoutPage = () => {
       order_status: 'Pending',
       paymentMethod: 'Cash On Delivery',
     };
-    console.log(orderData);
+    // console.log(orderData);
     await createOrder({ orderData, token });
     toast.success('Order placed successfully!');
     handleClearCart();
