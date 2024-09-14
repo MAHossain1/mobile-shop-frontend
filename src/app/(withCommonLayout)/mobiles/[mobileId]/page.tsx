@@ -8,9 +8,12 @@ const MobileDetailsPage = async ({
 }) => {
   const mobileId = params.mobileId;
 
-  const res = await fetch(`http://localhost:5000/api/v1/mobile/${mobileId}`, {
-    cache: 'no-store',
-  });
+  const res = await fetch(
+    `https://mobile-shop-backend-seven.vercel.app/api/v1/mobile/${mobileId}`,
+    {
+      cache: 'no-store',
+    }
+  );
 
   const mobile = await res.json();
 

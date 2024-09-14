@@ -27,10 +27,12 @@ const ManageOrderPage = () => {
   const {
     data: ordersData,
     isLoading,
-    isError,
+    error,
     refetch,
   } = useGetAllOrderQuery(token);
   const [updateOrder] = useUpdateOrderMutation();
+
+  // console.log(ordersData);
 
   const allStatus = ['Pending', 'Delivered', 'Canceled'];
 
@@ -71,7 +73,7 @@ const ManageOrderPage = () => {
   }
 
   // Handle error state
-  if (isError) {
+  if (error) {
     return (
       <div className="text-center text-red-600">
         <p>Something went wrong! Please try again later.</p>

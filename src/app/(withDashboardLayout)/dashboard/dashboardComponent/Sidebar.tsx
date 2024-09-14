@@ -2,7 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Home, ShoppingCart, Box, List, Menu, X } from 'lucide-react';
+import {
+  Home,
+  ShoppingCart,
+  Menu,
+  X,
+  TableProperties,
+  CirclePlus,
+} from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,18 +17,18 @@ const Sidebar: React.FC = () => {
   const menuItems = [
     { label: 'Home', icon: <Home size={24} />, href: '/' },
     {
-      label: 'Products',
-      icon: <Box size={24} />,
-      href: '/dashboard/admin/mobiles',
-    },
-    {
-      label: 'Add Product',
-      icon: <List size={24} />,
+      label: 'Add Mobile',
+      icon: <CirclePlus size={25} />,
       href: '/dashboard/admin/add-mobile',
     },
     {
+      label: 'Mobiles',
+      icon: <TableProperties size={25} />,
+      href: '/dashboard/admin/mobiles',
+    },
+    {
       label: 'Orders',
-      icon: <ShoppingCart size={24} />,
+      icon: <ShoppingCart size={25} />,
       href: '/dashboard/admin/orders',
     },
   ];
@@ -44,19 +51,19 @@ const Sidebar: React.FC = () => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:relative lg:w-64 lg:flex lg:flex-col lg:justify-between`}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full bg-gray-800">
           <div className="p-4 flex items-center justify-between border-b border-gray-700 lg:hidden mb-4">
             <h2 className="text-2xl font-semibold">Admin Dashboard</h2>
             <button onClick={() => setIsOpen(false)} className="text-white">
               <X size={24} />
             </button>
           </div>
-          <nav className="flex-grow overflow-y-auto">
+          <nav className="flex-grow overflow-y-auto bg-gray-800">
             {menuItems.map(item => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`flex items-center p-4 hover:bg-gray-700 transition duration-200`}
+                className="flex items-center p-4 hover:bg-gray-700 transition duration-200"
               >
                 {item.icon}
                 <span className="ml-4">{item.label}</span>

@@ -18,7 +18,21 @@ const authApi = baseApi.injectEndpoints({
         },
       }),
     }),
+    deleteMobile: builder.mutation({
+      query: ({ mobileId, token }) => ({
+        method: 'DELETE',
+        url: `mobile/${mobileId}`,
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+      invalidatesTags: ['mobile'],
+    }),
   }),
 });
 
-export const { useGetAllMobileQuery, useCreateMobileMutation } = authApi;
+export const {
+  useGetAllMobileQuery,
+  useCreateMobileMutation,
+  useDeleteMobileMutation,
+} = authApi;

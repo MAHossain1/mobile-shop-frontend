@@ -90,7 +90,12 @@ export default function NavBar() {
         </NavbarItem>
         {user?.userEmail ? (
           <NavbarItem>
-            <Button onClick={handleLogout} color="secondary" variant="flat">
+            <Button
+              onClick={handleLogout}
+              color="primary"
+              variant="ghost"
+              className="font-semibold uppercase"
+            >
               Logout
             </Button>
           </NavbarItem>

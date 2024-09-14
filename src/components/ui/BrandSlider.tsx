@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 function BrandSlider() {
   const settings = {
-    dots: true,
+    // dots: true,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -57,7 +57,7 @@ function BrandSlider() {
           </div>
           <div>
             <Image
-              src="https://i.ibb.co.com/SBvnVbC/pngegg-4.png"
+              src="https://i.ibb.co.com/0cTcd7q/pngegg-11.png"
               alt="phone-logo"
               height="100"
               width="100"
@@ -82,6 +82,14 @@ function BrandSlider() {
           <div>
             <Image
               src="https://i.ibb.co.com/9nkbpM5/pngegg-7.png"
+              alt="phone-logo"
+              height="100"
+              width="100"
+            />
+          </div>
+          <div>
+            <Image
+              src="https://i.ibb.co.com/tQxT8Nr/pngegg-9.png"
               alt="phone-logo"
               height="100"
               width="100"

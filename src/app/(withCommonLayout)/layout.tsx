@@ -14,7 +14,9 @@ export default async function CommonLayout({
   return (
     <div>
       <NavBar />
-      <main className="min-h-screen max-w-screen-xl	mx-auto">{children}</main>
+      <main className="min-h-screen">
+        <div className="w-full overflow-hidden">{children}</div>
+      </main>
     </div>
   );
 }
